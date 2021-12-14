@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Covid-19 vac slot tracker</string>
+    <string name="salutation">Hi &#128522;</string>
+    <string name="channel_name">Heads up notifications</string>
+    <string name="channel_description">Notification when slots for 18+ is available</string>
+
+</resources>
