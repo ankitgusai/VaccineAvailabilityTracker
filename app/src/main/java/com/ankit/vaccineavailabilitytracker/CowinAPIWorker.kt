@@ -10,9 +10,14 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.work.WorkerParameters
 import androidx.work.rxjava3.RxWorker
+import com.ankit.vaccineavailabilitytracker.activities.MainActivity
+import com.ankit.vaccineavailabilitytracker.apis.retrieveVaccinationLocationData
 import io.reactivex.rxjava3.core.Single
 import java.lang.Exception
 
+/**
+ * Work manager worker (Rx variant) (Love how Android framework devs started to embrace Rx).
+ */
 class CowinAPIWorker(appContext: Context, workerParams: WorkerParameters) : RxWorker(
     appContext,
     workerParams
@@ -20,17 +25,22 @@ class CowinAPIWorker(appContext: Context, workerParams: WorkerParameters) : RxWo
     override fun createWork(): Single<Result> {
         return Single.create { emitter ->
             try {
+                //fetch latest data
                 retrieveVaccinationLocationData(applicationContext)
+                //notify user if required
                 showNotificationIfSlotsAvailable()
+                //job success
                 emitter.onSuccess(Result.success())
 
             } catch (e: Exception) {
                 e.printStackTrace()
+                //plain error fail, we'll just try again next cycle.
                 emitter.onSuccess(Result.failure())
             }
         }
     }
 
+    //basic notification trigger to catch user's attention.
     fun showNotificationIfSlotsAvailable() {
         val spManager = SpManager(applicationContext)
 

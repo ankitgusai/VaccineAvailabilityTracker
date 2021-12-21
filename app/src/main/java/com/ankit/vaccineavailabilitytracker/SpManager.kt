@@ -5,6 +5,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import java.lang.StringBuilder
 
+/**
+ * Shared preference helper. Basic cleaner interface thanks to kotlin
+ */
 class SpManager(context: Context) {
     private val sharedPreferenceName = "VaccineSlotApp"
     private var sharedPreference: SharedPreferences =

@@ -1,10 +1,12 @@
-package com.ankit.vaccineavailabilitytracker
+package com.ankit.vaccineavailabilitytracker.apis
 
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
 
-
+/**
+ * JSON pojo for API call, filled by GSON in retrofit call.
+ */
 class VaccineLocationByPinPOJO {
     @SerializedName("centers")
     @Expose
